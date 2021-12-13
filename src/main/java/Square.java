@@ -1,5 +1,4 @@
 public class Square extends Shape {
-
     public Square(){
         super();
         this.type = "square";
@@ -13,17 +12,15 @@ public class Square extends Shape {
                 System.out.println(str.repeat(height));
             }
             else{
-                int split = Math.floorDiv(i, 2);
-                int padding_front = Math.floorDiv(split, 2);
-                int label_length = label.length();
+                // Variables to help center the label and handle whitespace
+                int labelLength = label.length();
                 label = label.replace("", " ").trim();
-                String new_row = str.repeat(padding_front) + label + " " + str.repeat(i-label_length-padding_front); 
-                System.out.println(new_row);
+                int paddingNeeded = height - labelLength;
+                int paddingFront = Math.floorDiv(paddingNeeded, 2);
+                // Create and print label row
+                String newRow = str.repeat(paddingFront) + label + " " + str.repeat(paddingNeeded-paddingFront); 
+                System.out.println(newRow);
             }
         }
-
-
-    }
-
-    
+    }   
 }

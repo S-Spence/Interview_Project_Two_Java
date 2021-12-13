@@ -4,7 +4,6 @@
 <h2>TO DO</h2>
 <ul>
   <li>Add unit tests</li>
-  <li>Fix label print for square</li>
   <li>Conduct further testing</li>
 </ul>
 
