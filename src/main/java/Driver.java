@@ -3,19 +3,19 @@ import java.util.Scanner;
 public class Driver {
 
     public static void main(String[] args) {
-
+        // Input variables
         String type = "";
         int height = 0;
         String label = "LU";
         int row = 4;
         char symbol;
-
+        // Instantiate scanner
         Scanner scnr = new Scanner(System.in);
-
-        
+        // Loop variable
         boolean runAgain = true;
-        
+        // Loop until variable set when the user enters no
         while(runAgain){
+            // Input validation helper variables
             String anotherShape = "";
             boolean validType = false;
             boolean validHeight = false;
@@ -27,14 +27,14 @@ public class Driver {
 
             // Determine shape type
             while(validType == false){
-                System.out.println("Select a Shape: Triangle, Diamond, or Square.");
+                System.out.println("Select a Shape (Triangle, Diamond, or Square): ");
                 type = scnr.next();
                 if(type.equalsIgnoreCase("triangle") || type.equalsIgnoreCase("square") || type.equalsIgnoreCase("diamond")){
                     validType = true;
                 }
             }
             
-            // Determine shape height
+            // Determine shape height with input validation
             System.out.println("Enter a height (integer greater than 3 or greater than 4 for diamonds): ");
             if (scnr.hasNextInt()){
                 height = scnr.nextInt();
@@ -47,12 +47,11 @@ public class Driver {
                     validHeight = true;
                 }
                 else{
-                    System.out.println("Please enter a valid height (Integer greater than 3 or greater than 4 for diamonds).");
+                    System.out.println("Invalid Input --Please enter a valid height (Integer greater than 3 or greater than 4 for diamonds): ");
                     if (scnr.hasNextInt()){
                         height = scnr.nextInt();
                     }
-                }
-                
+                }   
             }
             
             // Determine the ASCII character to use for drawing
@@ -60,44 +59,46 @@ public class Driver {
             // Truncate input if longer than a character
             symbol = scnr.next().charAt(0);
 
-            // Add custom label?
-            System.out.println("Would you like to add a custom label (Y/N)?");
+            // Add custom label? If so, handle input validation for given shapes
+            System.out.println("Would you like to add a custom label (Y/N)? ");
             addLabel = scnr.next();
             if(addLabel.equalsIgnoreCase("y") || addLabel.equalsIgnoreCase("n")){
                 validAdd = true;
             }
             while(validAdd == false){
-                System.out.println("Invalid Input: Please enter Y or N.");
+                System.out.println("Invalid Input --Please enter Y or N: ");
                 addLabel = scnr.next();
                 if(addLabel.equalsIgnoreCase("y") || addLabel.equalsIgnoreCase("n")){
                     validAdd = true;
                 }
             }
-            
+            // Code to add label
             if(addLabel.equalsIgnoreCase("y")){
                 while(validRow == false || validLabel == false){
-                    System.out.println("On which row should the label appear? Must be less than the height and fit on the row.");
+                    System.out.println("On which row should the label appear (must be less than or equal to the height and fit on the row)? ");
                     if(scnr.hasNextInt()){
                         row = scnr.nextInt();
                     }
                     else{
                         scnr.next();
                     }
-                    System.out.println("Please enter a label that fits on the specified row: ");
+                    System.out.println("Please enter a label that fits the specified row: ");
                     label = scnr.next();
-
+                    // Validate for square
                     if(type.equalsIgnoreCase("square")){
                         if(row <= height && label.length() <= height){
                             validRow = true;
                             validLabel = true;
                         }
                     }
+                    // Validate for triangle
                     else if(type.equalsIgnoreCase("triangle")){
-                        if(row <= height && label.length() < row){
+                        if(row <= height && label.length() <= row){
                             validRow = true;
                             validLabel = true;
                         }
                     }
+                    // Validate for diamond
                     else if(type.equalsIgnoreCase("diamond")){
                         boolean bottomHalf = false;
                         if(row > Math.floorDiv(height, 2)){
@@ -159,9 +160,7 @@ public class Driver {
             if(anotherShape.equalsIgnoreCase("N")) {
                 runAgain = false;
             }
-
         }
         scnr.close();
-    }
-      
+    }    
 }

@@ -6,9 +6,10 @@ public class Triangle extends Shape {
     }
 
     public void printTriangle(){
+        // Helper variables
         String spaces = " ";
         String sym = String.valueOf(symbol) + " ";
-        int label_length = label.length();
+        int labelLength = label.length();
         label = label.replace("", " ").trim();
         
         // Print triangle
@@ -17,11 +18,9 @@ public class Triangle extends Shape {
                 System.out.println(spaces.repeat(height+1-i) + sym.repeat(i));
             }
             else{
-                if(label.length() <= i){
-                    int split = Math.floorDiv(i, 2);
-                    int padding_front = Math.floorDiv(split, 2);
-                    System.out.println(spaces.repeat(height+1-i) + sym.repeat(padding_front) + label + " " + sym.repeat(i - label_length - padding_front));
-                }
+                int padding = i - labelLength;
+                int paddingFront = Math.floorDiv(padding, 2);
+                System.out.println(spaces.repeat(height+1-i) + sym.repeat(paddingFront) + label + " " + sym.repeat(padding - paddingFront));
             }
         }
     }  
