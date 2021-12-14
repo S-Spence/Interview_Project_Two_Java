@@ -104,7 +104,7 @@ public class Driver {
                         if(row > Math.floorDiv(height, 2)){
                             bottomHalf = true;
                         }
-                        if(bottomHalf == false && row <= height && label.length() < row){
+                        if(bottomHalf == false && row <= height && label.length() <= row){
                             validRow = true;
                             validLabel = true;
 
@@ -116,7 +116,6 @@ public class Driver {
                     }
                 }
             }
-          
             
             // Instantiate and print shapes
             if(type.equalsIgnoreCase("square")){
